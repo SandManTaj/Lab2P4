@@ -75,7 +75,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintNumber";
-            beforePrintEvent("PrintNumber", e);
+            beforePrintEvent(this, e);
         }
 
         Console.WriteLine("Number: {0,-12:N0}", num);
@@ -87,7 +87,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintDecimal";
-            beforePrintEvent("PrintDecimal", e);
+            beforePrintEvent(this, e);
         }
 
         Console.WriteLine("Decimal: {0:G}", dec);
@@ -99,7 +99,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintMoney";
-            beforePrintEvent("PrintMoney", e);
+            beforePrintEvent(this, e);
         }
 
         Console.WriteLine("Money: {0:C}", money);
@@ -111,7 +111,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintTemperature";
-            beforePrintEvent("PrintTemperature", e);
+            beforePrintEvent(this, e);
         }
 
         Console.WriteLine("Temperature: {0,4:N1} F", num);
@@ -122,7 +122,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintHexadecimal";
-            beforePrintEvent("PrintHexadecimal", e);
+            beforePrintEvent(this, e);
         }
 
         Console.WriteLine("Hexadecimal: {0:X}", dec);
