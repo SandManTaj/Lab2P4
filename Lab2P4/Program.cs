@@ -79,15 +79,6 @@ public class PrintHelper
     //declare event with .NET
     public event EventHandler<PrintEventArgs> beforePrintEvent;
 
-    protected virtual void OnBeforePrint(PrintEventArgs e)
-    {
-        EventHandler<PrintEventArgs> handler = beforePrintEvent;
-        if (handler != null)
-        {
-            handler(this, e);
-        }
-    }
-
     public PrintHelper()
     {
 
