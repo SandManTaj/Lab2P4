@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Tajbir Sandhu
+ * 9/11/2019
+ * CECS475
+ */
+
+using System;
 
 public class Program
 {
@@ -8,6 +14,9 @@ public class Program
         Number myNumber = new Number(100000);
         myNumber.PrintMoney();
         myNumber.PrintNumber();
+        myNumber.PrintHexadecimal();
+        myNumber.PrintDecimal();
+        myNumber.PrintTemperature();
     }
 }
 
@@ -31,6 +40,7 @@ class Number
 
     private int _value;
 
+    //creates property to edit _value
     public int Value
     {
         get { return _value; }
@@ -46,12 +56,27 @@ class Number
     {
         _printHelper.PrintNumber(_value);
     }
+
+    public void PrintDecimal()
+    {
+        _printHelper.PrintDecimal(_value);
+    }
+
+    public void PrintHexadecimal()
+    {
+        _printHelper.PrintHexadecimal(_value);
+    }
+
+    public void PrintTemperature()
+    {
+        _printHelper.PrintTemperature(_value);
+    }
 }
 
 public class PrintHelper
 {
 
-    //declare event of type delegate
+    //declare event with .NET
     public event EventHandler<PrintEventArgs> beforePrintEvent;
 
     protected virtual void OnBeforePrint(PrintEventArgs e)
@@ -75,7 +100,8 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintNumber";
-            beforePrintEvent("PrintNumber", e);
+            //raises event
+            beforePrintEvent.Invoke(this, e);
         }
 
         Console.WriteLine("Number: {0,-12:N0}", num);
@@ -87,7 +113,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintDecimal";
-            beforePrintEvent("PrintDecimal", e);
+            beforePrintEvent.Invoke(this, e);
         }
 
         Console.WriteLine("Decimal: {0:G}", dec);
@@ -99,7 +125,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintMoney";
-            beforePrintEvent("PrintMoney", e);
+            beforePrintEvent.Invoke(this, e);
         }
 
         Console.WriteLine("Money: {0:C}", money);
@@ -111,7 +137,7 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintTemperature";
-            beforePrintEvent("PrintTemperature", e);
+            beforePrintEvent.Invoke(this, e);
         }
 
         Console.WriteLine("Temperature: {0,4:N1} F", num);
@@ -122,13 +148,14 @@ public class PrintHelper
         {
             PrintEventArgs e = new PrintEventArgs();
             e.message = "PrintHexadecimal";
-            beforePrintEvent("PrintHexadecimal", e);
+            beforePrintEvent.Invoke(this, e);
         }
 
         Console.WriteLine("Hexadecimal: {0:X}", dec);
     }
 }
 
+//creates custom event arguments
 public class PrintEventArgs : EventArgs
 {
     public string message{ get; set; }
